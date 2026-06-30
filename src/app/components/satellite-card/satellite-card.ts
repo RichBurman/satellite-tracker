@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { Satellite } from '../../models/satellite';
 
 @Component({
   selector: 'app-satellite-card',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './satellite-card.css',
 })
 export class SatelliteCard {
+  satellite = input.required<Satellite>();
 
 }

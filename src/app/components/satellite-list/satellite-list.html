@@ -1,1 +1,5 @@
-<p>satellite-list works!</p>
+<h2>Satellite List</h2>
+
+@for (satellite of satellites(); track satellite.id) {
+    <app-satellite-card [satellite]="satellite"></app-satellite-card>
+}
