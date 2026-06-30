@@ -4,4 +4,16 @@
 
 <app-search-bar (searchChanged)="onSearch($event)" />
 
-<app-satellite-list [satellites]="filteredSatellites()"></app-satellite-list>
+@if (loading()) {
+  <p>Loading satellites...</p>
+}
+
+@if (error()) {
+  <p>
+    {{ error() }}
+  </p>
+}
+
+@if (!loading() && !error()) {
+  <app-satellite-list [satellites]="filteredSatellites()"> </app-satellite-list>
+}

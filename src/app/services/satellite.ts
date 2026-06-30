@@ -38,6 +38,6 @@ export class SatelliteService {
   ];
 
   getSatellites() {
-    return this.satellites;
+    return Promise.resolve(this.satellites);
   }
 }
