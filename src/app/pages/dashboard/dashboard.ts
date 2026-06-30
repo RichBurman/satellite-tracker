@@ -24,23 +24,29 @@ export class Dashboard {
 
   searchTerm = signal('');
 
-  ngOnInit() {
-    this.satelliteService.getSatellites().then(data=>{
-      this.satellites.set(data);
-      this.loading.set(false);
-    }).catch(error => {
-      this.error.set('Failed to load satellites.');
-      this.loading.set(false);
+  ngOnInit(): void {
+    this.satelliteService.getSatellites().subscribe({
+      next: (data) => {
+        this.satellites.set(data);
+
+        this.loading.set(false);
+      },
+
+      error: () => {
+        this.error.set('Unable to load satellites.');
+
+        this.loading.set(false);
+      },
     });
   }
 
   filteredSatellites = computed(() => {
     return this.satellites().filter((satellite) =>
-      satellite.name.toLowerCase().includes(this.searchTerm().toLowerCase())
+      satellite.name.toLowerCase().includes(this.searchTerm().toLowerCase()),
     );
   });
 
-  onSearch(value:string) {
+  onSearch(value: string) {
     this.searchTerm.set(value);
   }
 }
