@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 
 import { Navbar } from '../../components/navbar/navbar';
 import { SearchBar } from '../../components/search-bar/search-bar';
@@ -16,4 +16,16 @@ export class Dashboard {
   private satelliteService = inject(SatelliteService);
 
   satellites = signal(this.satelliteService.getSatellites());
+
+  searchTerm = signal('');
+
+  filteredSatellites = computed(() => {
+    return this.satellites().filter((satellite) =>
+      satellite.name.toLowerCase().includes(this.searchTerm().toLowerCase())
+    );
+  });
+
+  onSearch(value:string) {
+    this.searchTerm.set(value);
+  }
 }

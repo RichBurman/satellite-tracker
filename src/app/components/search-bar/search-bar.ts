@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './search-bar.css',
 })
 export class SearchBar {
+  searchChanged = output<string>();
 
+  onSearch(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchChanged.emit(value);
+  }
 }

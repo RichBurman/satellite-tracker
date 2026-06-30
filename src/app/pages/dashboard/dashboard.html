@@ -2,6 +2,6 @@
 
 <h1>Satellite Dashboard</h1>
 
-<app-search-bar />
+<app-search-bar (searchChanged)="onSearch($event)" />
 
-<app-satellite-list [satellites]="satellites()"></app-satellite-list>
+<app-satellite-list [satellites]="filteredSatellites()"></app-satellite-list>
